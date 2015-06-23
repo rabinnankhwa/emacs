@@ -10,6 +10,16 @@
                          ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 ;;enable ido mode
+;; To Disable Ido mode
+;; You can either press C-j to accept what you have typed so far, 
+;; or C-f which will drop you into regular find-file
+;; just to add, you can press C-z while in ido mode to disable its auto-completion.
+
+;; To create new directories while creating new files in Ido mode
+;;  - Type C-x C-f as usual
+;;  - provide non-existent path
+;;  - Press M-m which will prompt for new directory to create
+;;  - Specify filename in new directory
 (require 'ido)
 (ido-mode t)
 
