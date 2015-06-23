@@ -92,3 +92,9 @@
 ;;http://emacswiki.org/emacs/PythonProgrammingInEmacs#toc18
 ;;Unicode on Mac OS X
 (setenv "LC_CTYPE" "UTF-8")
+
+
+;;Simple Emacs Spreadsheet
+;;ses-mode
+;;http://www.emacswiki.org/emacs/SimpleEmacsSpreadsheet
+;;Used for Project Euler
