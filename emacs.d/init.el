@@ -32,6 +32,7 @@
 ;;list the packages to install
 (defvar my-packages '(auto-complete
 		      exec-path-from-shell
+		      ido-vertical-mode
 		      jedi
 		      yasnippet
 		      zenburn-theme)
@@ -60,8 +61,9 @@
 ;;  - provide non-existent path
 ;;  - Press M-m which will prompt for new directory to create
 ;;  - Specify filename in new directory
-(require 'ido)
-(ido-mode t)
+(require 'ido-vertical-mode)
+(ido-mode 1)
+(ido-vertical-mode 1)
 
 ;;add color to shell text
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
