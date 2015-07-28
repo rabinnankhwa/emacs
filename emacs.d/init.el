@@ -79,6 +79,10 @@
 ;;set line numbers
 (global-linum-mode 1)
 
+;;https://www.gnu.org/software/emacs/manual/html_node/efaq/Displaying-the-current-line-or-column.html
+;;display column number
+(setq column-number-mode t)
+
 ;;remove tool bar
 (tool-bar-mode -1)
 
