@@ -1,3 +1,5 @@
+;;; Initial setup of Emacs
+
 ;;http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/
 ;;required for `package-installed-p`
 (require 'package)
@@ -17,13 +19,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(initial-frame-alist (quote ((fullscreen . maximized)))))
-;;(custom-set-faces
+ '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(safe-local-variable-values (quote ((encoding . iso-8859-1)))))
+(custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-;; )
+)
 
 ;;install default packages
 ;;http://www.aaronbedra.com/emacs.d/
@@ -32,6 +35,7 @@
 ;;list the packages to install
 (defvar my-packages '(auto-complete
 		      exec-path-from-shell
+		      flycheck
 		      ido-vertical-mode
 		      jedi
 		      yasnippet
@@ -64,6 +68,10 @@
 (require 'ido-vertical-mode)
 (ido-mode 1)
 (ido-vertical-mode 1)
+
+;;http://www.flycheck.org/manual/latest/Quickstart.html#Quickstart
+;; For python => pip install pylint
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;add color to shell text
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
