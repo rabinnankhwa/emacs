@@ -6,8 +6,8 @@
 ;;http://caisah.info/emacs-for-python/
 ;;set packages
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("melpa" . "http://melpa.milkbox.net/packages/")
-			 ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
+			 ("melpa" . "https://melpa.org/packages/")
+			 ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 ;;http://www.emacswiki.org/emacs/FullScreen
