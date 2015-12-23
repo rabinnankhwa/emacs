@@ -5,10 +5,10 @@
 
 ;;http://caisah.info/emacs-for-python/
 ;;set packages
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+			 ("melpa" . "https://melpa.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")))
 
 ;;http://www.emacswiki.org/emacs/FullScreen
 ;;set default fullscreen
