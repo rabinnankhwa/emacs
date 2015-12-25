@@ -1,5 +1,7 @@
-;;; Initial setup of Emacs
+;;; initial_package --- Summary
+;;; Commentary:
 
+;;; Code:
 ;;http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/
 ;;required for `package-installed-p`
 (require 'package)
@@ -38,6 +40,7 @@
 		      flycheck
 		      ido-vertical-mode
 		      jedi
+		      multiple-cursors
 		      yasnippet
 		      zenburn-theme)
   "Default Packages")
@@ -132,7 +135,7 @@
 ;;Python configuration
 ;;http://emacswiki.org/emacs/PythonProgrammingInEmacs#toc18
 ;;Unicode on Mac OS X
-(setenv "LC_CTYPE" "UTF-8")
+(setenv "LC_All" "en_US.UTF-8")
 
 ;;exec-path-from-shell installation
 ;;Copy settings of PATH from bash
@@ -156,3 +159,18 @@
 ;;ses-mode
 ;;http://www.emacswiki.org/emacs/SimpleEmacsSpreadsheet
 ;;Used for Project Euler
+
+;;https://github.com/magnars/multiple-cursors.el
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;;http://www.idryman.org/blog/2013/05/20/emacs-and-pdf/
+;;brew install ghostscript
+;; view docs
+(fset 'doc-prev "\C-xo\C-x[\C-xo")
+(fset 'doc-next "\C-xo\C-x]\C-xo")
+(global-set-key (kbd "M-[") 'doc-prev)
+(global-set-key (kbd "M-]") 'doc-next)
