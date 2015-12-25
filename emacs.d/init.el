@@ -1,4 +1,5 @@
 ;;; initial_package --- Summary
+;; Setting up emacs
 ;;; Commentary:
 
 ;;; Code:
