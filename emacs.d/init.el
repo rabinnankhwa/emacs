@@ -161,6 +161,7 @@
 ;;http://www.emacswiki.org/emacs/SimpleEmacsSpreadsheet
 ;;Used for Project Euler
 
+;;Enable multiple cursors
 ;;https://github.com/magnars/multiple-cursors.el
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -168,6 +169,7 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+;;Enable viewing pdf, pictures in emacs
 ;;http://www.idryman.org/blog/2013/05/20/emacs-and-pdf/
 ;;brew install ghostscript
 ;; view docs
