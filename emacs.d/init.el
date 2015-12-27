@@ -177,3 +177,10 @@
 (fset 'doc-next "\C-xo\C-x]\C-xo")
 (global-set-key (kbd "M-[") 'doc-prev)
 (global-set-key (kbd "M-]") 'doc-next)
+
+;;Use CMD+Option with arrow keys to move between windows
+;;http://www.emacswiki.org/emacs/WindMove
+(global-set-key (kbd "<M-s-left>") 'windmove-left)
+(global-set-key (kbd "<M-s-right>") 'windmove-right)
+(global-set-key (kbd "<M-s-up>") 'windmove-up)
+(global-set-key (kbd "<M-s-down>") 'windmove-down)
