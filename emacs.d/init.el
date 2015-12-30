@@ -72,7 +72,8 @@
 (require 'ido-vertical-mode)
 (ido-mode 1)
 (ido-vertical-mode 1)
-
+(setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
+ 
 ;;http://www.flycheck.org/manual/latest/Quickstart.html#Quickstart
 ;; For python => pip install pylint
 (add-hook 'after-init-hook #'global-flycheck-mode)
