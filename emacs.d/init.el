@@ -123,6 +123,10 @@
 ;;https://github.com/capitaomorte/autopair#electric-pair-mode-in-emacs-244
 (electric-pair-mode t)
 
+;;C-k kills whole line and newline if at beginning of line
+;;http://xenon.stanford.edu/~manku/emacs.html
+(setq kill-whole-line t)
+
 ;; yasnippet
 ;; https://truongtx.me/2013/01/06/config-yasnippet-and-autocomplete-on-emacs/
 ;; should be loaded before auto complete so that they can work together
