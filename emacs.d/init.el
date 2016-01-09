@@ -88,7 +88,6 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;;http://www.emacswiki.org/emacs/CuaMode
-;;enable default full screen
 (cua-mode t)
 (setq cua-auto-tabify-rectangles nil) ;; Don't tabify after rectangle commands
 (transient-mark-mode 1) ;; No region when it is not highlighted
@@ -104,6 +103,11 @@
 
 ;;remove tool bar
 (tool-bar-mode -1)
+
+;;while running on terminal, disable menu-bar
+(if (display-graphic-p)
+    (menu-bar-mode 1)
+  (menu-bar-mode -1))
 
 ;;don't make backup files
 (setq make-backup-files nil)
@@ -196,7 +200,11 @@
 
 ;;Use CMD+Option with arrow keys to move between windows
 ;;http://www.emacswiki.org/emacs/WindMove
-(global-set-key (kbd "<M-s-left>") 'windmove-left)
-(global-set-key (kbd "<M-s-right>") 'windmove-right)
-(global-set-key (kbd "<M-s-up>") 'windmove-up)
-(global-set-key (kbd "<M-s-down>") 'windmove-down)
+(if (display-graphic-p)
+    (progn
+      (global-set-key (kbd "<M-s-left>") 'windmove-left)
+      (global-set-key (kbd "<M-s-right>") 'windmove-right)
+      (global-set-key (kbd "<M-s-up>") 'windmove-up)
+      (global-set-key (kbd "<M-s-down>") 'windmove-down)
+      )
+  )
