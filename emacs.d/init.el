@@ -46,6 +46,7 @@
 		      flycheck
 		      ido-vertical-mode
 		      jedi
+		      json-mode
 		      multiple-cursors
 		      yasnippet
 		      zenburn-theme)
