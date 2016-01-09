@@ -3,6 +3,11 @@
 ;;; Commentary:
 
 ;;; Code:
+;; Enable debug on error
+;;http://www.math.utah.edu/docs/info/emacs-lisp-intro_18.html
+;;http://www.cs.cmu.edu/~keng/emacs.config
+(setq debug-on-error t)
+
 ;;http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/
 ;;required for `package-installed-p`
 (require 'package)
