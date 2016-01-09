@@ -113,6 +113,11 @@
 ;;highlight parenthesis
 (show-paren-mode t)
 
+;;enable electric pair mode
+;;http://www.gnu.org/software/emacs/manual/html_node/emacs/Matching.html
+;;https://github.com/capitaomorte/autopair#electric-pair-mode-in-emacs-244
+(electric-pair-mode t)
+
 ;; yasnippet
 ;; https://truongtx.me/2013/01/06/config-yasnippet-and-autocomplete-on-emacs/
 ;; should be loaded before auto complete so that they can work together
