@@ -193,10 +193,14 @@
 ;;http://www.idryman.org/blog/2013/05/20/emacs-and-pdf/
 ;;brew install ghostscript
 ;; view docs
-(fset 'doc-prev "\C-xo\C-x[\C-xo")
-(fset 'doc-next "\C-xo\C-x]\C-xo")
-(global-set-key (kbd "M-[") 'doc-prev)
-(global-set-key (kbd "M-]") 'doc-next)
+(if (display-graphic-p)
+    (progn
+      (fset 'doc-prev "\C-xo\C-x[\C-xo")
+      (fset 'doc-next "\C-xo\C-x]\C-xo")
+      (global-set-key (kbd "M-[") 'doc-prev)
+      (global-set-key (kbd "M-]") 'doc-next)
+      )
+  )
 
 ;;Use CMD+Option with arrow keys to move between windows
 ;;http://www.emacswiki.org/emacs/WindMove
