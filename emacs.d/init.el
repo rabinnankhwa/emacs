@@ -154,9 +154,15 @@
 
 
 ;;Python configuration
+;;allow UTF-8 uppercase encoding in emacs
+;;http://stackoverflow.com/questions/14031724/how-to-make-emacs-accept-utf-8-uppercase-encoding
+(define-coding-system-alias 'UTF-8 'utf-8)
+
 ;;http://emacswiki.org/emacs/PythonProgrammingInEmacs#toc18
 ;;Unicode on Mac OS X
-(setenv "LC_All" "en_US.UTF-8")
+(add-hook 'python-mode-hook
+	  (lambda ()
+	    (setenv "LC_All" "en_US.UTF-8")))
 
 ;;exec-path-from-shell installation
 ;;Copy settings of PATH from bash
@@ -192,7 +198,7 @@
 ;;Enable viewing pdf, pictures in emacs
 ;;http://www.idryman.org/blog/2013/05/20/emacs-and-pdf/
 ;;brew install ghostscript
-;; view docs
+;; view docs, enabled only in graphical windows
 (if (display-graphic-p)
     (progn
       (fset 'doc-prev "\C-xo\C-x[\C-xo")
