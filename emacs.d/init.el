@@ -212,3 +212,6 @@
       (global-set-key (kbd "<M-s-down>") 'windmove-down)
       )
   )
+
+;;Shortcut ""C-x j"" used to convert a buffer to json pretty print format
+(global-set-key (kbd "C-x j") 'json-pretty-print-buffer)
