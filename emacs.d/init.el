@@ -1,9 +1,9 @@
 ;;; initial_package --- Summary
 ;; Setting up emacs
 ;;; Commentary:
-
-
 ;;; Code:
+
+
 
 ;;Changes which don't require any packages
 
@@ -104,6 +104,7 @@
 
 
 ;;install default packages
+
 ;;http://www.aaronbedra.com/emacs.d/
 ;;set environment
 (require 'cl)
@@ -151,8 +152,6 @@
 ;; For python => pip install pylint
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-
-
 ;; yasnippet
 ;; https://truongtx.me/2013/01/06/config-yasnippet-and-autocomplete-on-emacs/
 ;; should be loaded before auto complete so that they can work together
@@ -174,6 +173,8 @@
 (load-theme 'zenburn t)
 
 
+
+;;Configurations
 
 ;;Python configuration
 ;;allow UTF-8 uppercase encoding in emacs
@@ -203,7 +204,6 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
 
-
 ;;Simple Emacs Spreadsheet
 ;;ses-mode
 ;;http://www.emacswiki.org/emacs/SimpleEmacsSpreadsheet
@@ -216,6 +216,10 @@
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+
+
+;;Extra changes
 
 ;;Enable viewing pdf, pictures in emacs
 ;;http://www.idryman.org/blog/2013/05/20/emacs-and-pdf/
