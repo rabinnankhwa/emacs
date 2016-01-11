@@ -152,6 +152,8 @@
 ;;turn on zenburn theme
 (load-theme 'zenburn t)
 
+;;Ediff split windows vertically
+(setq ediff-split-window-function 'split-window-horizontally)
 
 ;;Python configuration
 ;;allow UTF-8 uppercase encoding in emacs
