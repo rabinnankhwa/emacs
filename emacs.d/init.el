@@ -226,4 +226,11 @@
   )
 
 ;;Shortcut ""C-x j"" used to convert a buffer to json pretty print format
-(global-set-key (kbd "C-x j") 'json-pretty-print-buffer)
+;;http://stackoverflow.com/questions/27262427/emacs-key-binding-for-multiple-commands
+(defun jsonify-buffer ()
+  "Convert the buffer to json format and read the buffer and pretty print the result"
+  (interactive)
+  (json-mode)
+  (json-pretty-print-buffer)
+  )
+(global-set-key (kbd "C-x j") 'jsonify-buffer)
