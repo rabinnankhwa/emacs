@@ -2,7 +2,11 @@
 ;; Setting up emacs
 ;;; Commentary:
 
+
 ;;; Code:
+
+;;Changes which don't require any packages
+
 ;; Enable debug on error
 ;;http://www.math.utah.edu/docs/info/emacs-lisp-intro_18.html
 ;;http://www.cs.cmu.edu/~keng/emacs.config
@@ -34,55 +38,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ )
 
-;;install default packages
-;;http://www.aaronbedra.com/emacs.d/
-;;set environment
-(require 'cl)
-;;list the packages to install
-(defvar my-packages '(auto-complete
-		      exec-path-from-shell
-		      flycheck
-		      ido-vertical-mode
-		      jedi
-		      json-mode
-		      multiple-cursors
-		      yasnippet
-		      zenburn-theme)
-  "Default Packages")
-;;check if package is installed
-(defun my-packages-installed-p ()
-  (loop for pkg in my-packages
-        when (not (package-installed-p pkg)) do (return nil)
-        finally (return t)))
-;;install package if not installed
-(unless (my-packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg my-packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
+;;Ediff split windows vertically
+(setq ediff-split-window-function 'split-window-horizontally)
 
-;;enable ido mode
-;; To Disable Ido mode
-;; You can either press C-j to accept what you have typed so far, 
-;; or C-f which will drop you into regular find-file
-;; just to add, you can press C-z while in ido mode to disable its auto-completion.
-
-;; To create new directories while creating new files in Ido mode
-;;  - Type C-x C-f as usual
-;;  - provide non-existent path
-;;  - Press M-m which will prompt for new directory to create
-;;  - Specify filename in new directory
-(require 'ido-vertical-mode)
-(ido-mode 1)
-(ido-vertical-mode 1)
-(setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
- 
-;;http://www.flycheck.org/manual/latest/Quickstart.html#Quickstart
-;; For python => pip install pylint
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;;Empty scratch buffer message
+(setq initial-scratch-message "")
 
 ;;add color to shell text
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -139,6 +101,58 @@
 ;;defaults to y
 (setq vc-follow-symlinks t)
 
+
+
+;;install default packages
+;;http://www.aaronbedra.com/emacs.d/
+;;set environment
+(require 'cl)
+;;list the packages to install
+(defvar my-packages '(auto-complete
+		      exec-path-from-shell
+		      flycheck
+		      ido-vertical-mode
+		      jedi
+		      json-mode
+		      multiple-cursors
+		      yasnippet
+		      zenburn-theme)
+  "Default Packages")
+;;check if package is installed
+(defun my-packages-installed-p ()
+  (loop for pkg in my-packages
+        when (not (package-installed-p pkg)) do (return nil)
+        finally (return t)))
+;;install package if not installed
+(unless (my-packages-installed-p)
+  (message "%s" "Refreshing package database...")
+  (package-refresh-contents)
+  (dolist (pkg my-packages)
+    (when (not (package-installed-p pkg))
+      (package-install pkg))))
+
+;;enable ido mode
+;; To Disable Ido mode
+;; You can either press C-j to accept what you have typed so far, 
+;; or C-f which will drop you into regular find-file
+;; just to add, you can press C-z while in ido mode to disable its auto-completion.
+
+;; To create new directories while creating new files in Ido mode
+;;  - Type C-x C-f as usual
+;;  - provide non-existent path
+;;  - Press M-m which will prompt for new directory to create
+;;  - Specify filename in new directory
+(require 'ido-vertical-mode)
+(ido-mode 1)
+(ido-vertical-mode 1)
+(setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
+ 
+;;http://www.flycheck.org/manual/latest/Quickstart.html#Quickstart
+;; For python => pip install pylint
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+
+
 ;; yasnippet
 ;; https://truongtx.me/2013/01/06/config-yasnippet-and-autocomplete-on-emacs/
 ;; should be loaded before auto complete so that they can work together
@@ -159,11 +173,6 @@
 ;;turn on zenburn theme
 (load-theme 'zenburn t)
 
-;;Ediff split windows vertically
-(setq ediff-split-window-function 'split-window-horizontally)
-
-;;Empty scratch buffer message
-(setq initial-scratch-message "")
 
 
 ;;Python configuration
