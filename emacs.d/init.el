@@ -132,6 +132,13 @@
 ;;http://xenon.stanford.edu/~manku/emacs.html
 (setq kill-whole-line t)
 
+;;Enable follow symbolic link by default
+;;http://stackoverflow.com/questions/15390178/emacs-and-symbolic-links
+;;No need to answer the question
+;;Symbolic link to Git-controlled source file; follow link? (y or n)
+;;defaults to y
+(setq vc-follow-symlinks t)
+
 ;; yasnippet
 ;; https://truongtx.me/2013/01/06/config-yasnippet-and-autocomplete-on-emacs/
 ;; should be loaded before auto complete so that they can work together
