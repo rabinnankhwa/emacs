@@ -12,18 +12,6 @@
 ;;http://www.cs.cmu.edu/~keng/emacs.config
 (setq debug-on-error t)
 
-;;http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/
-;;required for `package-installed-p`
-(require 'package)
-(package-initialize)
-
-;;http://caisah.info/emacs-for-python/
-;;set packages
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-			 ("melpa-stable" . "https://stable.melpa.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")))
-
 ;;http://www.emacswiki.org/emacs/FullScreen
 ;;set default fullscreen
 (custom-set-variables
@@ -104,6 +92,18 @@
 
 
 ;;install default packages
+
+;;http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/
+;;required for `package-installed-p`
+(require 'package)
+(package-initialize)
+
+;;http://caisah.info/emacs-for-python/
+;;set packages
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			 ("melpa-stable" . "https://stable.melpa.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")))
 
 ;;http://www.aaronbedra.com/emacs.d/
 ;;set environment
