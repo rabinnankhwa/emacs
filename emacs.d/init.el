@@ -155,6 +155,10 @@
 ;;Ediff split windows vertically
 (setq ediff-split-window-function 'split-window-horizontally)
 
+;;Empty scratch buffer message
+(setq initial-scratch-message "")
+
+
 ;;Python configuration
 ;;allow UTF-8 uppercase encoding in emacs
 ;;http://stackoverflow.com/questions/14031724/how-to-make-emacs-accept-utf-8-uppercase-encoding
