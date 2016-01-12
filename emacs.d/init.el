@@ -116,6 +116,7 @@
 		      jedi
 		      json-mode
 		      multiple-cursors
+		      seti-theme
 		      yasnippet
 		      zenburn-theme)
   "Default Packages")
@@ -170,7 +171,10 @@
 
 ;;https://github.com/bbatsov/zenburn-emacs
 ;;turn on zenburn theme
-(load-theme 'zenburn t)
+(if (display-graphic-p)
+    (load-theme 'zenburn t)
+  (load-theme 'seti t))
+;;(load-theme 'zenburn t)
 
 
 
