@@ -35,6 +35,7 @@
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-x j") 'json-pretty-print-buffer)
 
 ;;yes or no as y or n
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -120,12 +121,12 @@
 		      yasnippet
 		      auto-complete
 		      ;; flycheck ;;use-package to manage flycheck
+		      ;; magit ;;use-package to manage magit
 		      exec-path-from-shell
 		      zenburn-theme
-		      ;; magit ;;use-package to manage magit
 		      ;; csv-mode
 		      ;; jedi
-		      ;; json-mode
+		      ;; json-mode ;;already included in emacs 25.1
 		      ;; multiple-cursors
 		      ;; seti-theme
 		      
@@ -273,16 +274,6 @@
 ;;       (global-set-key (kbd "<M-s-down>") 'windmove-down)
 ;;       )
 ;;   )
-
-;; ;;Shortcut ""C-x j"" used to convert a buffer to json pretty print format
-;; ;;http://stackoverflow.com/questions/27262427/emacs-key-binding-for-multiple-commands
-;; (defun jsonify-buffer ()
-;;   "Convert the buffer to json format and read the buffer and pretty print the result"
-;;   (interactive)
-;;   (json-mode)
-;;   (json-pretty-print-buffer)
-;;   )
-;; (global-set-key (kbd "C-x j") 'jsonify-buffer)
 
 
 ;; ;;Added csv mode
