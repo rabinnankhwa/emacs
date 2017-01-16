@@ -20,7 +20,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(safe-local-variable-values (quote ((encoding . iso-8859-1)))))
+ '(package-selected-packages
+   (quote
+    (magit zenburn-theme yasnippet use-package ido-vertical-mode flycheck exec-path-from-shell auto-complete))))
+; '(safe-local-variable-values (quote ((encoding . iso-8859-1)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -28,20 +31,20 @@
  ;; If there is more than one, they won't work right.
  )
 
-;;Ediff split windows vertically
-(setq ediff-split-window-function 'split-window-horizontally)
+;;key bindings
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
 
-;;Empty scratch buffer message
-(setq initial-scratch-message "")
+;;yes or no as y or n
+(defalias 'yes-or-no-p 'y-or-n-p)
 
-;;add color to shell text
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-;;http://www.emacswiki.org/emacs/CuaMode
-;;(cua-mode t)
-;;(setq cua-auto-tabify-rectangles nil) ;; Don't tabify after rectangle commands
-;;(transient-mark-mode 1) ;; No region when it is not highlighted
-;;(setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
+;;Enable follow symbolic link by default
+;;http://stackoverflow.com/questions/15390178/emacs-and-symbolic-links
+;;No need to answer the question
+;;Symbolic link to Git-controlled source file; follow link? (y or n)
+;;defaults to y
+(setq vc-follow-symlinks t)
 
 ;;http://www.emacswiki.org/emacs/LineNumbers
 ;;set line numbers
@@ -59,16 +62,23 @@
     (menu-bar-mode 1)
   (menu-bar-mode -1))
 
+;;Ediff split windows vertically
+(setq ediff-split-window-function 'split-window-horizontally)
+
+;;Empty scratch buffer message
+(setq initial-scratch-message "")
+
+;;add color to shell text
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+;;http://www.emacswiki.org/emacs/CuaMode
+;;(cua-mode t)
+;;(setq cua-auto-tabify-rectangles nil) ;; Don't tabify after rectangle commands
+;;(transient-mark-mode 1) ;; No region when it is not highlighted
+;;(setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
+
 ;;don't make backup files
 (setq make-backup-files nil)
-
-;;yes or no as y or n
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;;key bindings
-(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
-(global-set-key (kbd "C-+") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
 
 ;;highlight parenthesis
 (show-paren-mode t)
@@ -82,46 +92,48 @@
 ;;http://xenon.stanford.edu/~manku/emacs.html
 (setq kill-whole-line t)
 
-;;Enable follow symbolic link by default
-;;http://stackoverflow.com/questions/15390178/emacs-and-symbolic-links
-;;No need to answer the question
-;;Symbolic link to Git-controlled source file; follow link? (y or n)
-;;defaults to y
-(setq vc-follow-symlinks t)
-
 
 
 ;;install default packages
 
 ;;http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/
+;; From doc of package-initialize
+;; If called as part of loading ‘user-init-file’, set
+;; ‘package-enable-at-startup’ to nil, to prevent accidentally
+;; loading packages twice.
+(setq package-enable-at-startup nil)
 ;;required for `package-installed-p`
 (require 'package)
+;;http://www.flycheck.org/en/latest/user/installation.html
+(add-to-list 'package-archives
+              '("MELPA Stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-;;http://caisah.info/emacs-for-python/
-;;set packages
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-			 ("melpa-stable" . "https://stable.melpa.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")))
 
 ;;http://www.aaronbedra.com/emacs.d/
 ;;set environment
 (require 'cl)
 ;;list the packages to install
-(defvar my-packages '(auto-complete
-		      exec-path-from-shell
-		      flycheck
+(defvar my-packages '(
+		      use-package
 		      ido-vertical-mode
-		      jedi
-		      json-mode
-		      multiple-cursors
-		      seti-theme
 		      yasnippet
-		      zenburn-theme)
-  "Default Packages")
+		      auto-complete
+		      ;; flycheck ;;use-package to manage flycheck
+		      exec-path-from-shell
+		      zenburn-theme
+		      ;; magit ;;use-package to manage magit
+		      ;; csv-mode
+		      ;; jedi
+		      ;; json-mode
+		      ;; multiple-cursors
+		      ;; seti-theme
+		      
+		      )
+  "Default Packages.")
 ;;check if package is installed
 (defun my-packages-installed-p ()
+  "Return nil if package not installed."
   (loop for pkg in my-packages
         when (not (package-installed-p pkg)) do (return nil)
         finally (return t)))
@@ -135,7 +147,7 @@
 
 ;;enable ido mode
 ;; To Disable Ido mode
-;; You can either press C-j to accept what you have typed so far, 
+;; You can either press C-j to accept what you have typed so far,
 ;; or C-f which will drop you into regular find-file
 ;; just to add, you can press C-z while in ido mode to disable its auto-completion.
 
@@ -145,13 +157,9 @@
 ;;  - Press M-m which will prompt for new directory to create
 ;;  - Specify filename in new directory
 (require 'ido-vertical-mode)
-(ido-mode 1)
+;; (ido-mode 1)
 (ido-vertical-mode 1)
 (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
- 
-;;http://www.flycheck.org/manual/latest/Quickstart.html#Quickstart
-;; For python => pip install pylint
-(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; yasnippet
 ;; https://truongtx.me/2013/01/06/config-yasnippet-and-autocomplete-on-emacs/
@@ -169,92 +177,115 @@
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
 
+;;exec-path-from-shell installation
+;;Copy settings of PATH from bash
+;;To synchronize path for bash and for emacs
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+;;Required for jedi installation (virtualenv)
+;;Required for flycheck http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-macos-exec-path-from-shell
+
+;; ;;http://www.flycheck.org/manual/latest/Quickstart.html#Quickstart
+;; ;; For python => pip install pylint
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
+;;http://www.flycheck.org/en/latest/user/installation.html
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
 ;;https://github.com/bbatsov/zenburn-emacs
 ;;turn on zenburn theme
 (if (display-graphic-p)
     (load-theme 'zenburn t)
-  (load-theme 'seti t))
-;;(load-theme 'zenburn t)
+  ;; (load-theme 'seti t)
+)
+;; (load-theme 'zenburn t)
 
-
-
-;;Configurations
-
-;;Python configuration
-;;allow UTF-8 uppercase encoding in emacs
-;;http://stackoverflow.com/questions/14031724/how-to-make-emacs-accept-utf-8-uppercase-encoding
-(define-coding-system-alias 'UTF-8 'utf-8)
-
-;;http://emacswiki.org/emacs/PythonProgrammingInEmacs#toc18
-;;Unicode on Mac OS X
-(add-hook 'python-mode-hook
-	  (lambda ()
-	    (setenv "LC_All" "en_US.UTF-8")))
-
-;;exec-path-from-shell installation
-;;Copy settings of PATH from bash
-;;To synchronize path for bash and for emacs
-;;Required for jedi installation (virtualenv)
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
-
-;;Jedi mode
-;;Steps before installing jedi
-;; pip install virtualenv
-;; pip install jedi
-;; pip install epc
-;; M-x jedi:install-server
-;;http://tkf.github.io/emacs-jedi/latest/
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
-
-;;Simple Emacs Spreadsheet
-;;ses-mode
-;;http://www.emacswiki.org/emacs/SimpleEmacsSpreadsheet
-;;Used for Project Euler
-
-;;Enable multiple cursors
-;;https://github.com/magnars/multiple-cursors.el
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-
-
-;;Extra changes
-
-;;Enable viewing pdf, pictures in emacs
-;;http://www.idryman.org/blog/2013/05/20/emacs-and-pdf/
-;;brew install ghostscript
-;; view docs, enabled only in graphical windows
-(if (display-graphic-p)
-    (progn
-      (fset 'doc-prev "\C-xo\C-x[\C-xo")
-      (fset 'doc-next "\C-xo\C-x]\C-xo")
-      (global-set-key (kbd "M-[") 'doc-prev)
-      (global-set-key (kbd "M-]") 'doc-next)
-      )
+;;https://github.com/jwiegley/use-package
+;;https://github.com/bradwright/emacs-d/blob/master/packages/init-magit.el
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status)
   )
 
-;;Use CMD+Option with arrow keys to move between windows
-;;http://www.emacswiki.org/emacs/WindMove
-(if (display-graphic-p)
-    (progn
-      (global-set-key (kbd "<M-s-left>") 'windmove-left)
-      (global-set-key (kbd "<M-s-right>") 'windmove-right)
-      (global-set-key (kbd "<M-s-up>") 'windmove-up)
-      (global-set-key (kbd "<M-s-down>") 'windmove-down)
-      )
-  )
 
-;;Shortcut ""C-x j"" used to convert a buffer to json pretty print format
-;;http://stackoverflow.com/questions/27262427/emacs-key-binding-for-multiple-commands
-(defun jsonify-buffer ()
-  "Convert the buffer to json format and read the buffer and pretty print the result"
-  (interactive)
-  (json-mode)
-  (json-pretty-print-buffer)
-  )
-(global-set-key (kbd "C-x j") 'jsonify-buffer)
+
+;; ;;Configurations
+
+;; ;;Python configuration
+;; ;;allow UTF-8 uppercase encoding in emacs
+;; ;;http://stackoverflow.com/questions/14031724/how-to-make-emacs-accept-utf-8-uppercase-encoding
+;; (define-coding-system-alias 'UTF-8 'utf-8)
+
+;; ;;http://emacswiki.org/emacs/PythonProgrammingInEmacs#toc18
+;; ;;Unicode on Mac OS X
+;; (add-hook 'python-mode-hook
+;; 	  (lambda ()
+;; 	    (setenv "LC_All" "en_US.UTF-8")))
+
+;; ;;Jedi mode
+;; ;;Steps before installing jedi
+;; ;; pip install virtualenv
+;; ;; pip install jedi
+;; ;; pip install epc
+;; ;; M-x jedi:install-server
+;; ;;http://tkf.github.io/emacs-jedi/latest/
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)
+
+;; ;;Simple Emacs Spreadsheet
+;; ;;ses-mode
+;; ;;http://www.emacswiki.org/emacs/SimpleEmacsSpreadsheet
+;; ;;Used for Project Euler
+
+;; ;;Enable multiple cursors
+;; ;;https://github.com/magnars/multiple-cursors.el
+;; (require 'multiple-cursors)
+;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+
+
+;; ;;Extra changes
+
+;; ;;Enable viewing pdf, pictures in emacs
+;; ;;http://www.idryman.org/blog/2013/05/20/emacs-and-pdf/
+;; ;;brew install ghostscript
+;; ;; view docs, enabled only in graphical windows
+;; (if (display-graphic-p)
+;;     (progn
+;;       (fset 'doc-prev "\C-xo\C-x[\C-xo")
+;;       (fset 'doc-next "\C-xo\C-x]\C-xo")
+;;       (global-set-key (kbd "M-[") 'doc-prev)
+;;       (global-set-key (kbd "M-]") 'doc-next)
+;;       )
+;;   )
+
+;; ;;Use CMD+Option with arrow keys to move between windows
+;; ;;http://www.emacswiki.org/emacs/WindMove
+;; (if (display-graphic-p)
+;;     (progn
+;;       (global-set-key (kbd "<M-s-left>") 'windmove-left)
+;;       (global-set-key (kbd "<M-s-right>") 'windmove-right)
+;;       (global-set-key (kbd "<M-s-up>") 'windmove-up)
+;;       (global-set-key (kbd "<M-s-down>") 'windmove-down)
+;;       )
+;;   )
+
+;; ;;Shortcut ""C-x j"" used to convert a buffer to json pretty print format
+;; ;;http://stackoverflow.com/questions/27262427/emacs-key-binding-for-multiple-commands
+;; (defun jsonify-buffer ()
+;;   "Convert the buffer to json format and read the buffer and pretty print the result"
+;;   (interactive)
+;;   (json-mode)
+;;   (json-pretty-print-buffer)
+;;   )
+;; (global-set-key (kbd "C-x j") 'jsonify-buffer)
+
+
+;; ;;Added csv mode
+;; (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
+;; (autoload 'csv-mode "csv-mode"
+;;   "Major mode for editing comma-separated value files." t)
