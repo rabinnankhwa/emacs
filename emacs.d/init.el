@@ -128,7 +128,7 @@
 		      ;; jedi
 		      ;; json-mode ;;already included in emacs 25.1
 		      ;; multiple-cursors
-		      ;; seti-theme
+		      ;; seti-theme ;;not present in melpa stable
 		      
 		      )
   "Default Packages.")
@@ -158,7 +158,7 @@
 ;;  - Press M-m which will prompt for new directory to create
 ;;  - Specify filename in new directory
 (require 'ido-vertical-mode)
-;; (ido-mode 1)
+(ido-mode 1)
 (ido-vertical-mode 1)
 (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
 
