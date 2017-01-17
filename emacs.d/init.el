@@ -4,7 +4,6 @@
 ;;; Code:
 
 
-
 ;;Changes which don't require any packages
 
 ;; Enable debug on error
@@ -13,21 +12,7 @@
 (setq debug-on-error t)
 
 ;;http://www.emacswiki.org/emacs/FullScreen
-;;set default fullscreen
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(initial-frame-alist (quote ((fullscreen . maximized))))
-)
-; '(safe-local-variable-values (quote ((encoding . iso-8859-1)))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
 
 ;;key bindings
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
@@ -147,9 +132,9 @@
 		      exec-path-from-shell
 		      zenburn-theme
 		      jedi ;; Python setup
-		      ;; csv-mode
+		      csv-mode
 		      ;; json-mode ;;already included in emacs 25.1
-		      ;; multiple-cursors
+		      multiple-cursors
 		      ;; seti-theme ;;not present in melpa stable
 		      
 		      )
@@ -231,7 +216,13 @@
   :bind ("C-x g" . magit-status)
   )
 
-
+;;Enable multiple cursors
+;;https://github.com/magnars/multiple-cursors.el
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; ;;Configurations
 
@@ -256,25 +247,6 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
 
-;; ;;Simple Emacs Spreadsheet
-;; ;;ses-mode
-;; ;;http://www.emacswiki.org/emacs/SimpleEmacsSpreadsheet
-;; ;;Used for Project Euler
 
-;; ;;Enable multiple cursors
-;; ;;https://github.com/magnars/multiple-cursors.el
-;; (require 'multiple-cursors)
-;; (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-;; (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-;; (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-
-
-
-
-
-;; ;;Added csv mode
-;; (add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-;; (autoload 'csv-mode "csv-mode"
-;;   "Major mode for editing comma-separated value files." t)
+(provide 'init)
+;;; init.el ends here
