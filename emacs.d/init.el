@@ -124,11 +124,11 @@
 ;;list the packages to install
 (defvar my-packages '(
 		      use-package
-		      ido-vertical-mode
+		      ;; ido-vertical-mode ;; use-package
 		      yasnippet
 		      auto-complete
-		      ;; flycheck ;;use-package to manage flycheck
-		      ;; magit ;;use-package to manage magit
+		      ;; flycheck ;;use-package
+		      ;; magit ;;use-package
 		      exec-path-from-shell
 		      zenburn-theme
 		      jedi ;; Python setup
@@ -164,10 +164,20 @@
 ;;  - provide non-existent path
 ;;  - Press M-m which will prompt for new directory to create
 ;;  - Specify filename in new directory
-(require 'ido-vertical-mode)
-(ido-mode 1)
-(ido-vertical-mode 1)
-(setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
+(use-package ido
+  :init
+  (progn
+    (ido-mode 1)
+    (use-package ido-vertical-mode
+      :init
+      (ido-vertical-mode 1)
+      (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
+      )
+    )
+  )
+;; (require 'ido-vertical-mode)
+;; (ido-vertical-mode 1)
+;; (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
 
 ;; yasnippet
 ;; https://truongtx.me/2013/01/06/config-yasnippet-and-autocomplete-on-emacs/
