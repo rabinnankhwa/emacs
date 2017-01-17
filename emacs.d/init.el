@@ -125,7 +125,7 @@
 (defvar my-packages '(
 		      use-package
 		      ;; ido-vertical-mode ;; use-package
-		      yasnippet
+		      ;; yasnippet ;; use-package
 		      auto-complete
 		      ;; flycheck ;;use-package
 		      ;; magit ;;use-package
@@ -136,7 +136,6 @@
 		      ;; json-mode ;;already included in emacs 25.1
 		      multiple-cursors
 		      ;; seti-theme ;;not present in melpa stable
-		      
 		      )
   "Default Packages.")
 ;;check if package is installed
@@ -165,28 +164,28 @@
 ;;  - Press M-m which will prompt for new directory to create
 ;;  - Specify filename in new directory
 (use-package ido
+  :ensure t
   :init
-  (progn
-    (ido-mode 1)
-    (use-package ido-vertical-mode
-      :init
-      (ido-vertical-mode 1)
-      (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
-      )
+  (ido-mode 1)
+  (use-package ido-vertical-mode
+    :ensure t
+    :init
+    (ido-vertical-mode 1)
+    (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
     )
   )
-;; (require 'ido-vertical-mode)
-;; (ido-vertical-mode 1)
-;; (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
 
 ;; yasnippet
 ;; https://truongtx.me/2013/01/06/config-yasnippet-and-autocomplete-on-emacs/
 ;; should be loaded before auto complete so that they can work together
-(require 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+  :ensure t
+  :init (yas-global-mode 1)
+  )
 
 ;;turn on autocomplete
 ;; should be loaded after yasnippet so that they can work together
+;; (use-package auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
 ;; set the trigger key so that it can work together with yasnippet on tab key,
@@ -215,9 +214,7 @@
 ;;turn on zenburn theme
 (if (display-graphic-p)
     (load-theme 'zenburn t)
-  ;; (load-theme 'seti t)
 )
-;; (load-theme 'zenburn t)
 
 ;;https://github.com/jwiegley/use-package
 ;;https://github.com/bradwright/emacs-d/blob/master/packages/init-magit.el
