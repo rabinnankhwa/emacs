@@ -20,9 +20,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(package-selected-packages
-   (quote
-    (magit zenburn-theme yasnippet use-package ido-vertical-mode flycheck exec-path-from-shell auto-complete))))
+)
 ; '(safe-local-variable-values (quote ((encoding . iso-8859-1)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -36,6 +34,30 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 (global-set-key (kbd "C-x j") 'json-pretty-print-buffer)
+
+;;Use CMD+Option with arrow keys to move between windows
+;;http://www.emacswiki.org/emacs/WindMove
+(if (display-graphic-p)
+    (progn
+      (global-set-key (kbd "<M-s-left>") 'windmove-left)
+      (global-set-key (kbd "<M-s-right>") 'windmove-right)
+      (global-set-key (kbd "<M-s-up>") 'windmove-up)
+      (global-set-key (kbd "<M-s-down>") 'windmove-down)
+      )
+  )
+
+;;Enable viewing pdf, pictures in emacs
+;;http://www.idryman.org/blog/2013/05/20/emacs-and-pdf/
+;;brew install ghostscript
+;; view docs, enabled only in graphical windows
+(if (display-graphic-p)
+    (progn
+      (fset 'doc-prev "\C-xo\C-x[\C-xo")
+      (fset 'doc-next "\C-xo\C-x]\C-xo")
+      (global-set-key (kbd "M-[") 'doc-prev)
+      (global-set-key (kbd "M-]") 'doc-next)
+      )
+  )
 
 ;;yes or no as y or n
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -124,8 +146,8 @@
 		      ;; magit ;;use-package to manage magit
 		      exec-path-from-shell
 		      zenburn-theme
+		      jedi ;; Python setup
 		      ;; csv-mode
-		      ;; jedi
 		      ;; json-mode ;;already included in emacs 25.1
 		      ;; multiple-cursors
 		      ;; seti-theme ;;not present in melpa stable
@@ -224,15 +246,15 @@
 ;; 	  (lambda ()
 ;; 	    (setenv "LC_All" "en_US.UTF-8")))
 
-;; ;;Jedi mode
-;; ;;Steps before installing jedi
-;; ;; pip install virtualenv
-;; ;; pip install jedi
-;; ;; pip install epc
-;; ;; M-x jedi:install-server
-;; ;;http://tkf.github.io/emacs-jedi/latest/
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)
+;;Jedi mode
+;;Steps before installing jedi
+;; pip install virtualenv
+;; pip install jedi
+;; pip install epc
+;; M-x jedi:install-server
+;;http://tkf.github.io/emacs-jedi/latest/
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
 
 ;; ;;Simple Emacs Spreadsheet
 ;; ;;ses-mode
@@ -249,31 +271,7 @@
 
 
 
-;; ;;Extra changes
 
-;; ;;Enable viewing pdf, pictures in emacs
-;; ;;http://www.idryman.org/blog/2013/05/20/emacs-and-pdf/
-;; ;;brew install ghostscript
-;; ;; view docs, enabled only in graphical windows
-;; (if (display-graphic-p)
-;;     (progn
-;;       (fset 'doc-prev "\C-xo\C-x[\C-xo")
-;;       (fset 'doc-next "\C-xo\C-x]\C-xo")
-;;       (global-set-key (kbd "M-[") 'doc-prev)
-;;       (global-set-key (kbd "M-]") 'doc-next)
-;;       )
-;;   )
-
-;; ;;Use CMD+Option with arrow keys to move between windows
-;; ;;http://www.emacswiki.org/emacs/WindMove
-;; (if (display-graphic-p)
-;;     (progn
-;;       (global-set-key (kbd "<M-s-left>") 'windmove-left)
-;;       (global-set-key (kbd "<M-s-right>") 'windmove-right)
-;;       (global-set-key (kbd "<M-s-up>") 'windmove-up)
-;;       (global-set-key (kbd "<M-s-down>") 'windmove-down)
-;;       )
-;;   )
 
 
 ;; ;;Added csv mode
