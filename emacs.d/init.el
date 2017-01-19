@@ -136,9 +136,9 @@
 		      ;; flycheck ;;use-package
 		      ;; magit ;;use-package
 		      exec-path-from-shell
-		      zenburn-theme
+		      ;; zenburn-theme ;;use-package
 		      jedi ;; Python setup
-		      csv-mode
+		      ;; csv-mode ;;use-package
 		      ;; json-mode ;;already included in emacs 25.1
 		      multiple-cursors
 		      ;; seti-theme ;;not present in melpa stable
@@ -158,6 +158,22 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
+;;https://github.com/bbatsov/zenburn-emacs
+;;turn on zenburn theme
+(use-package zenburn-theme
+  :ensure t
+  :config
+  (if (display-graphic-p)
+      (load-theme 'zenburn t)
+    )
+  )
+
+
+;;csv-mode
+(use-package csv-mode
+  :ensure t
+  )
+
 ;;enable ido mode
 ;; To Disable Ido mode
 ;; You can either press C-j to accept what you have typed so far,
@@ -171,11 +187,11 @@
 ;;  - Specify filename in new directory
 (use-package ido
   :ensure t
-  :init
+  :config
   (ido-mode 1)
   (use-package ido-vertical-mode
     :ensure t
-    :init
+    :config
     (ido-vertical-mode 1)
     (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
     )
@@ -186,7 +202,7 @@
 ;; should be loaded before auto complete so that they can work together
 (use-package yasnippet
   :ensure t
-  :init (yas-global-mode 1)
+  :config (yas-global-mode 1)
   )
 
 ;;turn on autocomplete
@@ -216,14 +232,9 @@
   :ensure t
   :init (global-flycheck-mode))
 
-;;https://github.com/bbatsov/zenburn-emacs
-;;turn on zenburn theme
-(if (display-graphic-p)
-    (load-theme 'zenburn t)
-)
-
 ;;https://github.com/jwiegley/use-package
 ;;https://github.com/bradwright/emacs-d/blob/master/packages/init-magit.el
+;;Magit reference: https://magit.vc/manual/magit-refcard.pdf
 (use-package magit
   :ensure t
   :bind ("C-x g" . magit-status)
