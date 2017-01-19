@@ -132,15 +132,15 @@
 		      use-package
 		      ;; ido-vertical-mode ;; use-package
 		      ;; yasnippet ;; use-package
-		      auto-complete
+		      ;; auto-complete ;;use-package
 		      ;; flycheck ;;use-package
 		      ;; magit ;;use-package
 		      ;; exec-path-from-shell ;;use-package
 		      ;; zenburn-theme ;;use-package
-		      jedi ;; Python setup
+		      ;; jedi ;; Python setup
 		      ;; csv-mode ;;use-package
 		      ;; json-mode ;;already included in emacs 25.1
-		      multiple-cursors
+		      ;; multiple-cursors ;;use-package
 		      ;; seti-theme ;;not present in melpa stable
 		      )
   "Default Packages.")
@@ -207,14 +207,19 @@
 
 ;;turn on autocomplete
 ;; should be loaded after yasnippet so that they can work together
-;; (use-package auto-complete
-(require 'auto-complete-config)
-(ac-config-default)
-;; set the trigger key so that it can work together with yasnippet on tab key,
-;; if the word exists in yasnippet, pressing tab will cause yasnippet to
-;; activate, otherwise, auto-complete will
-(ac-set-trigger-key "TAB")
-(ac-set-trigger-key "<tab>")
+(use-package auto-complete
+  :ensure t
+  :init
+  (use-package auto-complete-config
+    :config
+    (ac-config-default)
+    ;; set the trigger key so that it can work together with yasnippet on tab key,
+    ;; if the word exists in yasnippet, pressing tab will cause yasnippet to
+    ;; activate, otherwise, auto-complete will
+    (ac-set-trigger-key "TAB")
+    (ac-set-trigger-key "<tab>")
+    )
+  )
 
 ;;exec-path-from-shell installation
 ;;Copy settings of PATH from bash
@@ -225,7 +230,6 @@
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize))
   )
-
 ;;Required for jedi installation (virtualenv)
 ;;Required for flycheck http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-macos-exec-path-from-shell
 
@@ -235,7 +239,7 @@
 ;;http://www.flycheck.org/en/latest/user/installation.html
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :config (global-flycheck-mode))
 
 ;;https://github.com/jwiegley/use-package
 ;;https://github.com/bradwright/emacs-d/blob/master/packages/init-magit.el
@@ -247,11 +251,16 @@
 
 ;;Enable multiple cursors
 ;;https://github.com/magnars/multiple-cursors.el
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(use-package multiple-cursors
+  :ensure t
+  :bind (
+	 ("C-S-c C-S-c" . mc/edit-lines)
+	 ("C->" . mc/mark-next-like-this)
+	 ("C-<" . mc/mark-previous-like-this)
+	 ("C-c C-<" . mc/mark-all-like-this)
+	 )
+  )
+
 
 ;; ;;Configurations
 
@@ -273,9 +282,11 @@
 ;; pip install epc
 ;; M-x jedi:install-server
 ;;http://tkf.github.io/emacs-jedi/latest/
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
-
+(use-package jedi
+  :init
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t)
+  )
 
 (provide 'init)
 ;;; init.el ends here
