@@ -283,6 +283,7 @@
 ;; M-x jedi:install-server
 ;;http://tkf.github.io/emacs-jedi/latest/
 (use-package jedi
+  :ensure t
   :init
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t)
