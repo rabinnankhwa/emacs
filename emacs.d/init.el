@@ -14,6 +14,12 @@
 ;;http://www.emacswiki.org/emacs/FullScreen
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 
+;;Setting transparent on UI mode
+;;http://stackoverflow.com/questions/21946382/how-to-get-transparent-window-in-gnu-emacs-on-osx
+(if (display-graphic-p)
+    (add-to-list 'default-frame-alist '(alpha 85 85))
+  )
+
 ;;key bindings
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-+") 'text-scale-increase)
