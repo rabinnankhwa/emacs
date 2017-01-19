@@ -253,6 +253,9 @@
 ;;https://github.com/magnars/multiple-cursors.el
 (use-package multiple-cursors
   :ensure t
+  :init
+  (global-unset-key (kbd "M-<down-mouse-1>"))
+  (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
   :bind (
 	 ("C-S-c C-S-c" . mc/edit-lines)
 	 ("C->" . mc/mark-next-like-this)
