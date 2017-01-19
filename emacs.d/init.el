@@ -135,7 +135,7 @@
 		      auto-complete
 		      ;; flycheck ;;use-package
 		      ;; magit ;;use-package
-		      exec-path-from-shell
+		      ;; exec-path-from-shell ;;use-package
 		      ;; zenburn-theme ;;use-package
 		      jedi ;; Python setup
 		      ;; csv-mode ;;use-package
@@ -158,6 +158,7 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
+
 ;;https://github.com/bbatsov/zenburn-emacs
 ;;turn on zenburn theme
 (use-package zenburn-theme
@@ -167,7 +168,6 @@
       (load-theme 'zenburn t)
     )
   )
-
 
 ;;csv-mode
 (use-package csv-mode
@@ -219,8 +219,13 @@
 ;;exec-path-from-shell installation
 ;;Copy settings of PATH from bash
 ;;To synchronize path for bash and for emacs
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize))
+  )
+
 ;;Required for jedi installation (virtualenv)
 ;;Required for flycheck http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-macos-exec-path-from-shell
 
