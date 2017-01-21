@@ -125,7 +125,7 @@
 
 
 ;;http://www.aaronbedra.com/emacs.d/
-;;set environment
+;;required for emacs functions like "loop"
 (require 'cl)
 ;;list the packages to install
 (defvar my-packages '(
@@ -159,14 +159,17 @@
       (package-install pkg))))
 
 
+;;https://github.com/jwiegley/use-package
+(eval-when-compile
+  (require 'use-package))
+;(setq use-package-always-ensure t) ;;causes problems
+
 ;;https://github.com/bbatsov/zenburn-emacs
 ;;turn on zenburn theme
 (use-package zenburn-theme
   :ensure t
-  :config
-  (if (display-graphic-p)
-      (load-theme 'zenburn t)
-    )
+  :if window-system
+  :config (load-theme 'zenburn t)
   )
 
 ;;csv-mode
@@ -187,7 +190,7 @@
 ;;  - Specify filename in new directory
 (use-package ido
   :ensure t
-  :config
+  :init
   (ido-mode 1)
   (use-package ido-vertical-mode
     :ensure t
@@ -226,9 +229,9 @@
 ;;To synchronize path for bash and for emacs
 (use-package exec-path-from-shell
   :ensure t
-  :config
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize))
+  :if (memq window-system '(mac ns))
+  :config (exec-path-from-shell-initialize)
+  (message "path exec shell")
   )
 ;;Required for jedi installation (virtualenv)
 ;;Required for flycheck http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-macos-exec-path-from-shell
@@ -257,10 +260,8 @@
   (global-unset-key (kbd "M-<down-mouse-1>"))
   (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
   :bind (
-	 ("C-S-c C-S-c" . mc/edit-lines)
 	 ("C->" . mc/mark-next-like-this)
 	 ("C-<" . mc/mark-previous-like-this)
-	 ("C-c C-<" . mc/mark-all-like-this)
 	 )
   )
 
