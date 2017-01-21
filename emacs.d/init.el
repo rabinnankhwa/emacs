@@ -130,18 +130,6 @@
 ;;list the packages to install
 (defvar my-packages '(
 		      use-package
-		      ;; ido-vertical-mode ;; use-package
-		      ;; yasnippet ;; use-package
-		      ;; auto-complete ;;use-package
-		      ;; flycheck ;;use-package
-		      ;; magit ;;use-package
-		      ;; exec-path-from-shell ;;use-package
-		      ;; zenburn-theme ;;use-package
-		      ;; jedi ;; Python setup
-		      ;; csv-mode ;;use-package
-		      ;; json-mode ;;already included in emacs 25.1
-		      ;; multiple-cursors ;;use-package
-		      ;; seti-theme ;;not present in melpa stable
 		      )
   "Default Packages.")
 ;;check if package is installed
@@ -192,12 +180,22 @@
   :ensure t
   :init
   (ido-mode 1)
+  (ido-everywhere 1)
   (use-package ido-vertical-mode
     :ensure t
     :config
     (ido-vertical-mode 1)
     (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
     )
+  (use-package smex
+    :ensure t
+    :bind (("M-x" . smex)
+	   ("M-X" . smex-major-mode-commands))
+    :config
+    (smex-initialize)
+    )
+  :config
+  (add-to-list 'ido-ignore-files "\\.DS_Store")
   )
 
 ;; yasnippet
@@ -231,7 +229,6 @@
   :ensure t
   :if (memq window-system '(mac ns))
   :config (exec-path-from-shell-initialize)
-  (message "path exec shell")
   )
 ;;Required for jedi installation (virtualenv)
 ;;Required for flycheck http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-macos-exec-path-from-shell
