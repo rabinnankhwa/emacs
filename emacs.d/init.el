@@ -79,8 +79,10 @@
 ;;Ediff split windows vertically
 (setq ediff-split-window-function 'split-window-horizontally)
 
-;;Empty scratch buffer message
-(setq initial-scratch-message "")
+;;http://aaronbedra.com/emacs.d/#splash-screen
+;;Empty splash screen and scratch buffer message
+(setq inhibit-splash-screen t
+      initial-scratch-message nil)
 
 ;;add color to shell text
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -186,6 +188,15 @@
     :config
     (ido-vertical-mode 1)
     (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
+    (setq ido-use-faces t)
+    (set-face-attribute 'ido-vertical-first-match-face nil
+    			:background "white"
+			:foreground "#00b000")
+    (set-face-attribute 'ido-vertical-only-match-face nil
+    			:background "#00b000"
+    			:foreground "white")
+    (set-face-attribute 'ido-vertical-match-face nil
+			:foreground "#00b000")
     )
   (use-package smex
     :ensure t
