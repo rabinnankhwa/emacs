@@ -81,8 +81,8 @@
 
 ;;http://aaronbedra.com/emacs.d/#splash-screen
 ;;Empty splash screen and scratch buffer message
-(setq inhibit-splash-screen t
-      initial-scratch-message nil)
+;;(setq inhibit-splash-screen t)
+(setq initial-scratch-message nil)
 
 ;;add color to shell text
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
