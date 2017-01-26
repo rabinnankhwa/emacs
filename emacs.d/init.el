@@ -3,6 +3,19 @@
 ;;; Commentary:
 ;;; Code:
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
 
 ;;Changes which don't require any packages
 
@@ -159,13 +172,11 @@
 (use-package zenburn-theme
   :ensure t
   :if window-system
-  :config (load-theme 'zenburn t)
-  )
+  :config (load-theme 'zenburn t))
 
 ;;csv-mode
 (use-package csv-mode
-  :ensure t
-  )
+  :ensure t)
 
 ;;enable ido mode
 ;; To Disable Ido mode
@@ -196,26 +207,21 @@
     			:background "#00b000"
     			:foreground "white")
     (set-face-attribute 'ido-vertical-match-face nil
-			:foreground "#00b000")
-    )
+			:foreground "#00b000"))
   (use-package smex
     :ensure t
     :bind (("M-x" . smex)
 	   ("M-X" . smex-major-mode-commands))
-    :config
-    (smex-initialize)
-    )
+    :config (smex-initialize))
   :config
-  (add-to-list 'ido-ignore-files "\\.DS_Store")
-  )
+  (add-to-list 'ido-ignore-files "\\.DS_Store"))
 
 ;; yasnippet
 ;; https://truongtx.me/2013/01/06/config-yasnippet-and-autocomplete-on-emacs/
 ;; should be loaded before auto complete so that they can work together
 (use-package yasnippet
   :ensure t
-  :config (yas-global-mode 1)
-  )
+  :config (yas-global-mode 1))
 
 ;;turn on autocomplete
 ;; should be loaded after yasnippet so that they can work together
@@ -225,13 +231,13 @@
   (use-package auto-complete-config
     :config
     (ac-config-default)
+    ;;Delay to show quick help (default: 1.5)
+    (setq ac-quick-help-delay 0.5)
     ;; set the trigger key so that it can work together with yasnippet on tab key,
     ;; if the word exists in yasnippet, pressing tab will cause yasnippet to
     ;; activate, otherwise, auto-complete will
     (ac-set-trigger-key "TAB")
-    (ac-set-trigger-key "<tab>")
-    )
-  )
+    (ac-set-trigger-key "<tab>")))
 
 ;;exec-path-from-shell installation
 ;;Copy settings of PATH from bash
@@ -239,8 +245,8 @@
 (use-package exec-path-from-shell
   :ensure t
   :if (memq window-system '(mac ns))
-  :config (exec-path-from-shell-initialize)
-  )
+  :config (exec-path-from-shell-initialize))
+
 ;;Required for jedi installation (virtualenv)
 ;;Required for flycheck http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-macos-exec-path-from-shell
 
@@ -257,8 +263,7 @@
 ;;Magit reference: https://magit.vc/manual/magit-refcard.pdf
 (use-package magit
   :ensure t
-  :bind ("C-x g" . magit-status)
-  )
+  :bind ("C-x g" . magit-status))
 
 ;;Enable multiple cursors
 ;;https://github.com/magnars/multiple-cursors.el
@@ -267,12 +272,24 @@
   :init
   (global-unset-key (kbd "M-<down-mouse-1>"))
   (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
-  :bind (
-	 ("C->" . mc/mark-next-like-this)
-	 ("C-<" . mc/mark-previous-like-this)
-	 )
-  )
+  :bind (("C->" . mc/mark-next-like-this)
+	 ("C-<" . mc/mark-previous-like-this)))
 
+;;Projectile mode
+;;https://github.com/bbatsov/projectile
+;;https://github.com/rejeep/emacs/blob/master/init.el
+;;Shortcuts
+;; C-c p s : Switch to project
+;; C-c p f : List files in project
+;; C-c p k : Kill all buffers from project
+(use-package projectile
+  :ensure t
+  :init (projectile-global-mode)
+  :config
+  (progn
+    (setq projectile-enable-caching t)
+    ;(setq projectile-require-project-root nil)
+    (add-to-list 'projectile-globally-ignored-files ".DS_Store")))
 
 ;; ;;Configurations
 
@@ -290,16 +307,19 @@
 ;;Jedi mode
 ;;Steps before installing jedi
 ;; pip install virtualenv
-;; pip install jedi
-;; pip install epc
+;; pip install jedi ;not needed?
+;; pip install epc  ;not needed?
 ;; M-x jedi:install-server
 ;;http://tkf.github.io/emacs-jedi/latest/
 (use-package jedi
   :ensure t
   :init
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (setq jedi:complete-on-dot t)
-  )
+  ;Hook up to autocomplete
+  (add-to-list 'ac-sources 'ac-source-jedi-direct)
+  ;Enable for python mode
+  (add-hook 'python-mode-hook 'jedi:setup))
+  ;;(setq jedi:complete-on-dot t))
+  
 
 (provide 'init)
 ;;; init.el ends here
