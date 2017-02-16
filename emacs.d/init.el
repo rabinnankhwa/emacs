@@ -8,7 +8,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ '(package-selected-packages
+   (quote
+    (flx-ido zenburn-theme yasnippet use-package smex projectile multiple-cursors magit jedi ido-vertical-mode flycheck exec-path-from-shell csv-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -72,6 +74,11 @@
 ;;Symbolic link to Git-controlled source file; follow link? (y or n)
 ;;defaults to y
 (setq vc-follow-symlinks t)
+
+;;https://www.youtube.com/watch?v=5FQwQ0QWBTU
+;;https://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
+;;turn on semantic mode
+(semantic-mode 1)
 
 ;;http://www.emacswiki.org/emacs/LineNumbers
 ;;set line numbers
@@ -199,20 +206,28 @@
     :config
     (ido-vertical-mode 1)
     (setq ido-vertical-define-keys (quote C-n-C-p-up-and-down))
-    (setq ido-use-faces t)
-    (set-face-attribute 'ido-vertical-first-match-face nil
-    			:background "white"
-			:foreground "#00b000")
-    (set-face-attribute 'ido-vertical-only-match-face nil
-    			:background "#00b000"
-    			:foreground "white")
-    (set-face-attribute 'ido-vertical-match-face nil
-			:foreground "#00b000"))
+    ;; (setq ido-use-faces t)
+    ;; (set-face-attribute 'ido-vertical-first-match-face nil
+    ;; 			:background "white"
+    ;; 			:foreground "#00b000")
+    ;; (set-face-attribute 'ido-vertical-only-match-face nil
+    ;; 			:background "#00b000"
+    ;; 			:foreground "white")
+    ;; (set-face-attribute 'ido-vertical-match-face nil
+    ;; 			:foreground "#00b000")
+    )
   (use-package smex
     :ensure t
+    :init (setq smex-save-file "~/.emacs.d/smex-items")
     :bind (("M-x" . smex)
 	   ("M-X" . smex-major-mode-commands))
+
     :config (smex-initialize))
+  (use-package flx-ido
+    :ensure t
+    :config
+    (flx-ido-mode 1)
+    (setq ido-enable-flex-matching t))
   :config
   (add-to-list 'ido-ignore-files "\\.DS_Store"))
 
@@ -311,14 +326,17 @@
 ;; pip install epc  ;not needed?
 ;; M-x jedi:install-server
 ;;http://tkf.github.io/emacs-jedi/latest/
+;; C-c ? => jedi:show-doc
+;; C-c . => jedi:goto-definition
+;; C-c , => jedi:goto-definition-pop-marker
 (use-package jedi
   :ensure t
   :init
   ;Hook up to autocomplete
   (add-to-list 'ac-sources 'ac-source-jedi-direct)
   ;Enable for python mode
-  (add-hook 'python-mode-hook 'jedi:setup))
-  ;;(setq jedi:complete-on-dot t))
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t))
   
 
 (provide 'init)
