@@ -3,23 +3,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (flx-ido zenburn-theme yasnippet use-package smex projectile multiple-cursors magit jedi ido-vertical-mode flycheck exec-path-from-shell csv-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
 
 ;;Changes which don't require any packages
+
+;;Detach custom file
+;;http://emacsblog.org/2008/12/06/quick-tip-detaching-the-custom-file/
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
 
 ;; Enable debug on error
 ;;http://www.math.utah.edu/docs/info/emacs-lisp-intro_18.html
@@ -337,7 +327,13 @@
   ;Enable for python mode
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t))
-  
+
+;; ;;haskell mode
+;; ;;https://github.com/chenglou/emacs.d/tree/master/use-package example
+;; (use-package haskell-mode
+;;   :commands haskell-mode
+;;   :init
+;;   (add-to-list 'auto-mode-alist '("\\.l?hs$" . haskell-mode)))
 
 (provide 'init)
 ;;; init.el ends here
