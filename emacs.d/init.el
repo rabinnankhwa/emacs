@@ -168,7 +168,7 @@
 ;;turn on zenburn theme
 (use-package zenburn-theme
   :ensure t
-  :if window-system
+;;  :if window-system
   :config (load-theme 'zenburn t))
 
 ;;csv-mode
@@ -278,7 +278,8 @@
   (global-unset-key (kbd "M-<down-mouse-1>"))
   (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
   :bind (("C->" . mc/mark-next-like-this)
-	 ("C-<" . mc/mark-previous-like-this)))
+	 ("C-<" . mc/mark-previous-like-this)
+	 ("C-c C-<" . mc/mark-all-like-this)))
 
 ;;Projectile mode
 ;;https://github.com/bbatsov/projectile
@@ -327,6 +328,10 @@
   ;Enable for python mode
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t))
+
+;; yaml mode
+;; https://github.com/yoshiki/yaml-mode
+(use-package yaml-mode)
 
 ;; ;;haskell mode
 ;; ;;https://github.com/chenglou/emacs.d/tree/master/use-package example
