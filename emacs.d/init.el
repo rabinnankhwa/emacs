@@ -340,5 +340,17 @@
 ;;   :init
 ;;   (add-to-list 'auto-mode-alist '("\\.l?hs$" . haskell-mode)))
 
+
+;;notmuch setup for mail
+;;https://github.com/DamienCassou/emacs.d/blob/master/init.el
+(eval-and-compile
+  (setq-default notmuch-command (executable-find "notmuch")))
+
+(use-package notmuch
+  :if notmuch-command
+  :bind (("C-c m" . notmuch))
+  :init (setq notmuch-search-oldest-first nil))
+
+
 (provide 'init)
 ;;; init.el ends here
