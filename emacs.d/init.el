@@ -352,5 +352,23 @@
   :init (setq notmuch-search-oldest-first nil))
 
 
+;;https://www.emacswiki.org/emacs/MessageMode
+(setq user-mail-address "rabin.nankhwa@gmail.com"
+      user-full-name "Rabin Nankhwa"
+      message-send-mail-function 'message-smtpmail-send-it
+      ;; TODO
+      ;; smtp settings only valid for message mode
+      ;; bind these definitions to start of message package???
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      ;; add Cc and Bcc headers to the message buffer
+      message-default-mail-headers "Cc: \nBcc: \n"
+      ;; postponed message is put in the following draft folder
+      message-auto-save-directory "~/.mail"
+      ;; get extra auth info from ~/.authinfo
+      ;; https://www.gnu.org/software/emacs/manual/html_node/smtpmail/Authentication.html
+      )
+
+
 (provide 'init)
 ;;; init.el ends here
