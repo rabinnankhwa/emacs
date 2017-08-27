@@ -352,7 +352,10 @@
   :init (setq notmuch-search-oldest-first nil))
 
 
+;;Setup email sending from gmail using message mode
 ;;https://www.emacswiki.org/emacs/MessageMode
+;;This requires explicit permission to allow apps to access gmail
+;;https://myaccount.google.com/lesssecureapps
 (setq user-mail-address "rabin.nankhwa@gmail.com"
       user-full-name "Rabin Nankhwa"
       message-send-mail-function 'message-smtpmail-send-it
