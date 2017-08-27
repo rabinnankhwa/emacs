@@ -65,6 +65,13 @@
 ;;defaults to y
 (setq vc-follow-symlinks t)
 
+;;Disable vc in tramp mode
+;;Makes tramp mode faster :)
+(setq vc-ignore-dir-regexp
+      (format "\\(%s\\)\\|\\(%s\\)"
+	      vc-ignore-dir-regexp
+	      tramp-file-name-regexp))
+
 ;;https://www.youtube.com/watch?v=5FQwQ0QWBTU
 ;;https://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html
 ;;turn on semantic mode
