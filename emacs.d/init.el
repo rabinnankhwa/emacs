@@ -125,6 +125,9 @@
 ;;http://xenon.stanford.edu/~manku/emacs.html
 (setq kill-whole-line t)
 
+;;Auto update buffers
+;;https://www.emacswiki.org/emacs/RevertBuffer
+(global-auto-revert-mode 1)
 
 
 ;;install default packages
