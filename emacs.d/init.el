@@ -339,9 +339,18 @@
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t))
 
+;; ansible mode
+;; https://github.com/k1LoW/emacs-ansible
+(use-package ansible)
+
+
 ;; yaml mode
 ;; https://github.com/yoshiki/yaml-mode
-(use-package yaml-mode)
+(use-package yaml-mode
+    :init
+  ;Enable for yaml mode
+  (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
+
 
 ;; ;;haskell mode
 ;; ;;https://github.com/chenglou/emacs.d/tree/master/use-package example
