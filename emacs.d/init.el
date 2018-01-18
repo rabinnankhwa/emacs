@@ -93,8 +93,6 @@
     (menu-bar-mode 1)
   (menu-bar-mode -1))
 
-;;Ediff split windows vertically
-(setq ediff-split-window-function 'split-window-horizontally)
 
 ;;http://aaronbedra.com/emacs.d/#splash-screen
 ;;Empty splash screen and scratch buffer message
@@ -173,6 +171,16 @@
 (eval-when-compile
   (require 'use-package))
 ;(setq use-package-always-ensure t) ;;causes problems
+
+
+;;Ediff split windows vertically
+;;(setq ediff-split-window-function 'split-window-horizontally)
+(use-package ediff
+  :config
+  (setq ediff-shell (getenv "$SHELL"))
+  (setq-default ediff-split-window-function
+		(quote split-window-vertically)))
+
 
 ;;https://github.com/bbatsov/zenburn-emacs
 ;;turn on zenburn theme
@@ -273,6 +281,9 @@
   :ensure t
   :config (global-flycheck-mode))
 
+;;https://github.com/mattss/emacs.d/blob/master/init.el
+(use-package flymake :disabled t)
+
 ;;https://github.com/jwiegley/use-package
 ;;https://github.com/bradwright/emacs-d/blob/master/packages/init-magit.el
 ;;Magit reference: https://magit.vc/manual/magit-refcard.pdf
@@ -369,6 +380,10 @@
   :if notmuch-command
   :bind (("C-c m" . notmuch))
   :init (setq notmuch-search-oldest-first nil))
+
+
+;; tide mode for typescript
+(use-package tide)
 
 
 ;;Setup email sending from gmail using message mode
