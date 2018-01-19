@@ -29,7 +29,7 @@
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
-(global-set-key (kbd "C-x j") 'json-pretty-print-buffer)
+(global-set-key (kbd "C-x j") 'json-pretty-print-buffer-ordered)
 
 ;;Use CMD+Option with arrow keys to move between windows
 ;;http://www.emacswiki.org/emacs/WindMove
@@ -352,13 +352,15 @@
 
 ;; ansible mode
 ;; https://github.com/k1LoW/emacs-ansible
-(use-package ansible)
+(use-package ansible
+  :ensure t)
 
 
 ;; yaml mode
 ;; https://github.com/yoshiki/yaml-mode
 (use-package yaml-mode
-    :init
+  :ensure t
+  :init
   ;Enable for yaml mode
   (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
 
@@ -383,7 +385,8 @@
 
 
 ;; tide mode for typescript
-(use-package tide)
+(use-package tide
+  :ensure t)
 
 
 ;;Setup email sending from gmail using message mode
