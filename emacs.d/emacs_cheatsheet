@@ -1,1 +1,5 @@
 Refresh buffer : C-x C-v
+Git status : C-x g
+Git merge: m
+Commit: c c <message> C-c C-c
+Current head : cat .git/HEAD

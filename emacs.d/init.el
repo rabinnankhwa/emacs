@@ -289,7 +289,14 @@
 ;;Magit reference: https://magit.vc/manual/magit-refcard.pdf
 (use-package magit
   :ensure t
-  :bind ("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status)
+  :init
+  (add-hook 'after-save-hook 'magit-after-save-refresh-status)
+  (use-package magit-filenotify
+    :ensure t
+    :init (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+    )
+  )
 
 ;;Enable multiple cursors
 ;;https://github.com/magnars/multiple-cursors.el
