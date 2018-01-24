@@ -352,7 +352,6 @@
               (projectile-project-p)
               (fboundp 'projectile-project-root))
           (neotree-dir (projectile-project-root)))
-  	(message "myneotree-show-inside")
         (neotree-find path))
       (neo-global--open))
     (neo-global--select-window)
