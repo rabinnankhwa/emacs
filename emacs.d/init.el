@@ -325,6 +325,41 @@
     ;(setq projectile-require-project-root nil)
     (add-to-list 'projectile-globally-ignored-files ".DS_Store")))
 
+
+;;http://mads-hartmann.com/2016/05/12/emacs-tree-view.html
+;;https://www.emacswiki.org/emacs/NeoTree
+;;https://github.com/jaypei/emacs-neotree
+(use-package neotree
+  :ensure t
+  :init
+  (setq neo-smart-open t)
+  ;; autorefresh disabled cuz it would revert to default directory as root
+  ;; need to toggle to refresh side panel as autorefresh is disabled.
+  (setq neo-autorefresh nil)
+  (setq projectile-switch-project-action 'neotree-projectile-action)
+  (global-set-key [f8] 'neotree-toggle)
+  :config
+  ;; overriding default definition of neotree-show to show proper git root
+  ;; https://github.com/jaypei/emacs-neotree/pull/263/files
+  (defun neotree-show ()
+  "Show the NeoTree window."
+  (interactive)
+  (let ((cw (selected-window))
+         (path (buffer-file-name)))  ;; save current window and buffer
+    (if neo-smart-open
+      (progn
+        (when (and (fboundp 'projectile-project-p)
+              (projectile-project-p)
+              (fboundp 'projectile-project-root))
+          (neotree-dir (projectile-project-root)))
+  	(message "myneotree-show-inside")
+        (neotree-find path))
+      (neo-global--open))
+    (neo-global--select-window)
+    (when neo-toggle-window-keep-p
+      (select-window cw))))
+  )
+
 ;; ;;Configurations
 
 ;; ;;Python configuration
