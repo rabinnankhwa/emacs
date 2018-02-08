@@ -193,6 +193,10 @@
 (use-package csv-mode
   :ensure t)
 
+;;resize window
+(use-package windsize
+  :ensure t)
+
 ;;enable ido mode
 ;; To Disable Ido mode
 ;; You can either press C-j to accept what you have typed so far,
@@ -336,8 +340,10 @@
   ;; autorefresh disabled cuz it would revert to default directory as root
   ;; need to toggle to refresh side panel as autorefresh is disabled.
   (setq neo-autorefresh nil)
+  (setq neo-window-width 40)
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (global-set-key [f8] 'neotree-toggle)
+  (global-set-key [f5] 'neotree-show)
   :config
   ;; overriding default definition of neotree-show to show proper git root
   ;; https://github.com/jaypei/emacs-neotree/pull/263/files
@@ -424,6 +430,21 @@
   :bind (("C-c m" . notmuch))
   :init (setq notmuch-search-oldest-first nil))
 
+
+;;js2-mode for javascript editing
+;;https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html
+(use-package js2-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  ;; Better imenu
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  (use-package js2-refactor
+    :ensure t
+    :init
+    (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    (js2r-add-keybindings-with-prefix "C-c C-r")
+    (define-key js2-mode-map (kbd "C-k") #'js2r-kill)))
 
 ;; tide mode for typescript
 (use-package tide
