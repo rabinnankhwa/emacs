@@ -450,6 +450,10 @@
 (use-package tide
   :ensure t)
 
+;; rust-mode for rust
+(use-package rust-mode
+  :ensure t)
+
 
 ;;Setup email sending from gmail using message mode
 ;;https://www.emacswiki.org/emacs/MessageMode
