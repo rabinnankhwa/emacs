@@ -93,6 +93,8 @@
     (menu-bar-mode 1)
   (menu-bar-mode -1))
 
+;;Ediff split windows vertically
+(setq ediff-split-window-function 'split-window-horizontally)
 
 ;;http://aaronbedra.com/emacs.d/#splash-screen
 ;;Empty splash screen and scratch buffer message
@@ -171,15 +173,6 @@
 (eval-when-compile
   (require 'use-package))
 ;(setq use-package-always-ensure t) ;;causes problems
-
-
-;;Ediff split windows vertically
-;;(setq ediff-split-window-function 'split-window-horizontally)
-(use-package ediff
-  :config
-  (setq ediff-shell (getenv "$SHELL"))
-  (setq-default ediff-split-window-function
-		(quote split-window-vertically)))
 
 
 ;;https://github.com/bbatsov/zenburn-emacs
