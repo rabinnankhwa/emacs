@@ -190,6 +190,12 @@
 (use-package windsize
   :ensure t)
 
+;;which-key mode
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode))
+
 ;;enable ido mode
 ;; To Disable Ido mode
 ;; You can either press C-j to accept what you have typed so far,
@@ -364,6 +370,24 @@
 ;; (add-hook 'python-mode-hook
 ;; 	  (lambda ()
 ;; 	    (setenv "LC_All" "en_US.UTF-8")))
+
+;; https://stackoverflow.com/questions/25669809/how-do-you-run-python-code-using-emacs
+;; In a python buffer:
+
+;;     C-c C-z : open a python shell
+;;     C-c C-c : run the content of the buffer in the opened python shell
+;;     C-c C-r : run the selected region in the python shell
+
+;; IPython as default python interpreter
+;; https://stackoverflow.com/questions/17817019/how-to-open-ipython-interpreter-in-emacs
+(when (executable-find "ipython")
+  ;; (setq python-shell-interpreter "ipython"))
+  (setq python-shell-interpreter "ipython"
+	python-shell-interpreter-args "--simple-prompt -i"))
+
+;; Also, checkout
+;; https://masteringemacs.org/article/compiling-running-scripts-emacs
+
 
 ;;Jedi mode
 ;;Steps before installing jedi
