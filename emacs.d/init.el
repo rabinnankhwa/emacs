@@ -315,12 +315,12 @@
 ;; C-c p k : Kill all buffers from project
 (use-package projectile
   :ensure t
-  :init (projectile-global-mode)
   :config
   (progn
     (setq projectile-enable-caching t)
     ;(setq projectile-require-project-root nil)
-    (add-to-list 'projectile-globally-ignored-files ".DS_Store")))
+    (add-to-list 'projectile-globally-ignored-files ".DS_Store"))
+  (projectile-mode +1))
 
 
 ;;http://mads-hartmann.com/2016/05/12/emacs-tree-view.html
