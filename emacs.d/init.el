@@ -146,9 +146,6 @@
 (package-initialize)
 
 
-;;http://www.aaronbedra.com/emacs.d/
-;;required for emacs functions like "loop"
-(require 'cl)
 ;;list the packages to install
 (defvar my-packages '(
 		      use-package
@@ -157,9 +154,9 @@
 ;;check if package is installed
 (defun my-packages-installed-p ()
   "Return nil if package not installed."
-  (loop for pkg in my-packages
-        when (not (package-installed-p pkg)) do (return nil)
-        finally (return t)))
+  (cl-loop for pkg in my-packages
+        when (not (package-installed-p pkg)) do (cl-return nil)
+        finally (cl-return t)))
 ;;install package if not installed
 (unless (my-packages-installed-p)
   (message "%s" "Refreshing package database...")
