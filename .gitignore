@@ -1,1 +1,8 @@
 \#*#
+*.dat
+*.last
+*.eld
+custom.el
+elpa
+transient
+auto-save-list
