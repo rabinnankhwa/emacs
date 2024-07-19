@@ -156,10 +156,6 @@
 (use-package csv-mode
   :ensure t)
 
-;;resize window
-(use-package windsize
-  :ensure t)
-
 ;;which-key mode
 (use-package which-key
   :ensure t
