@@ -256,7 +256,8 @@
   :init
   (global-unset-key (kbd "M-<down-mouse-1>"))
   (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
-  :bind (("C->" . mc/mark-next-like-this)
+  :bind (("C-S-c C-S-c" . 'mc/edit-lines)
+	 ("C->" . mc/mark-next-like-this)
 	 ("C-<" . mc/mark-previous-like-this)
 	 ("C-c C-<" . mc/mark-all-like-this)))
 
