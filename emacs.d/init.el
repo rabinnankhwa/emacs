@@ -247,7 +247,6 @@
 ;;Magit reference: https://magit.vc/manual/magit-refcard.pdf
 (use-package magit
   :ensure t
-  :bind ("C-x g" . magit-status)
   )
 
 ;;Enable multiple cursors
