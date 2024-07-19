@@ -77,9 +77,9 @@
 ;;turn on semantic mode
 (semantic-mode 1)
 
-;;http://www.emacswiki.org/emacs/LineNumbers
+;;https://www.reddit.com/r/emacs/comments/15e26ea/comment/ju6ddjc/
 ;;set line numbers
-(global-linum-mode 1)
+(global-display-line-numbers-mode 1)
 
 ;;https://www.gnu.org/software/emacs/manual/html_node/efaq/Displaying-the-current-line-or-column.html
 ;;display column number
