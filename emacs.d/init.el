@@ -129,7 +129,6 @@
 ;;https://www.emacswiki.org/emacs/RevertBuffer
 (global-auto-revert-mode 1)
 
-
 ;;install default packages
 
 ;;http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/
@@ -144,32 +143,6 @@
 (add-to-list 'package-archives
               '("MELPA Stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
-
-
-;;list the packages to install
-(defvar my-packages '(
-		      use-package
-		      )
-  "Default Packages.")
-;;check if package is installed
-(defun my-packages-installed-p ()
-  "Return nil if package not installed."
-  (cl-loop for pkg in my-packages
-        when (not (package-installed-p pkg)) do (cl-return nil)
-        finally (cl-return t)))
-;;install package if not installed
-(unless (my-packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg my-packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-
-
-;;https://github.com/jwiegley/use-package
-(eval-when-compile
-  (require 'use-package))
-;(setq use-package-always-ensure t) ;;causes problems
 
 
 ;;https://github.com/bbatsov/zenburn-emacs
