@@ -242,17 +242,6 @@
 ;;Required for jedi installation (virtualenv)
 ;;Required for flycheck http://www.flycheck.org/en/latest/user/troubleshooting.html#flycheck-macos-exec-path-from-shell
 
-;; ;;http://www.flycheck.org/manual/latest/Quickstart.html#Quickstart
-;; ;; For python => pip install pylint
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-;;http://www.flycheck.org/en/latest/user/installation.html
-(use-package flycheck
-  :ensure t
-  :config (global-flycheck-mode))
-
-;;https://github.com/mattss/emacs.d/blob/master/init.el
-(use-package flymake :disabled t)
-
 ;;https://github.com/jwiegley/use-package
 ;;https://github.com/bradwright/emacs-d/blob/master/packages/init-magit.el
 ;;Magit reference: https://magit.vc/manual/magit-refcard.pdf
